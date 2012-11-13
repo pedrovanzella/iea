@@ -11,6 +11,7 @@ SHARED_OBJS =
 
 prepare:
 	mkdir -p objs/{client,server,shared} bin
+	cp examples/questionsdb bin/questionsdb
 
 bin/client: $(CLIENT_OBJS) $(SHARED_OBJS)
 	$(CXX) $(CXXFLAGS) $(LIBS) $(CLIENT_OBJS) $(SHARED_OBJS) -o bin/client
