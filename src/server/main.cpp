@@ -21,11 +21,11 @@ int main(int argc, char** argv)
 
 	std::cout << "Add new question:" << std::endl;
 	std::cout << "Question: ";
-	char* desc;
-	std::cin.getline(desc, 1024);
+	std::string desc;
+	getline(std::cin, desc);
 	std::cout << "Answer: ";
-	char* ans;
-	std::cin.getline(ans, 1024);
+	std::string ans;
+	getline(std::cin, ans);
 	Question *q = new Question(desc, ans);
 	add_question_to_db(questions, q);
 
@@ -41,6 +41,7 @@ void load_questions(std::vector<Question*> *questions)
 
 void add_question_to_db(std::vector<Question*> *questions, Question* q)
 {
+	/* Segfaulting here */
 	questions->push_back(q);
 
 	std::ofstream outfile;
