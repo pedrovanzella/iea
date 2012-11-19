@@ -3,10 +3,7 @@
 #include <fstream>
 #include <vector>
 #include "question.hpp"
-
-/* Private functions */
-void load_questions(std::vector<Question>& questions);
-void add_question_to_db(std::vector<Question>& questions, Question& q);
+#include "main.hpp"
 
 using std::cout;
 using std::cin;
@@ -48,7 +45,6 @@ void load_questions(vector<Question>& questions)
 
 void add_question_to_db(vector<Question>& questions, Question& q)
 {
-	/* Segfaulting here */
 	questions.push_back(q);
 
 	std::ofstream outfile;

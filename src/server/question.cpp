@@ -2,28 +2,30 @@
 #include <iostream>
 #include <string>
 
-std::string Question::description()
+using std::string;
+
+string Question::description()
 {
 	return _description;
 }
 
-std::string Question::answer()
+string Question::answer()
 {
 	return _answer;
 }
 
-void Question::set_description(std::string d)
+void Question::set_description(string d)
 {
 	/* Might want to check this? */
 	_description = d;
 }
 
-void Question::set_answer(std::string a)
+void Question::set_answer(string a)
 {
 	_answer = a;
 }
 
-Question::Question(std::string d, std::string a)
+Question::Question(string d, string a)
 {
 	/* Calling setters to use their (possible) verifications */
 	set_description(d);

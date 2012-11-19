@@ -12,10 +12,10 @@ class Question
 	std::string description();
 	std::string answer();
 
-	void set_description(std::string d);
-	void set_answer(std::string a);
+	void set_description(std::string);
+	void set_answer(std::string);
 
-	Question(std::string d, std::string a);
+	Question(std::string, std::string);
 	Question();
 };
 
