@@ -5,47 +5,54 @@
 #include "question.hpp"
 
 /* Private functions */
-void load_questions(std::vector<Question*>* questions);
-void add_question_to_db(std::vector<Question*>* questions, Question* q);
+void load_questions(std::vector<Question>& questions);
+void add_question_to_db(std::vector<Question>& questions, Question& q);
+
+using std::cout;
+using std::cin;
+using std::string;
+using std::endl;
+using std::vector;
+using std::ifstream;
 
 int main(int argc, char** argv)
 {
 	boost::asio::io_service io_service;
 
-	std::cout << "Init server" << std::endl;
+	cout << "Init server" << endl;
 
-	std::vector<Question*> *questions = NULL; // God save us all
+	vector<Question> questions;
 
-	std::cout << "Loading questions" << std::endl;
+	cout << "Loading questions" << endl;
 	load_questions(questions);
 
-	std::cout << "Add new question:" << std::endl;
-	std::cout << "Question: ";
-	std::string desc;
-	getline(std::cin, desc);
-	std::cout << "Answer: ";
-	std::string ans;
-	getline(std::cin, ans);
-	Question *q = new Question(desc, ans);
+	cout << "Add new question:" << endl;
+	cout << "Question: ";
+	string desc;
+	getline(cin, desc);
+	cout << "Answer: ";
+	string ans;
+	getline(cin, ans);
+	Question q(desc, ans);
 	add_question_to_db(questions, q);
 
 	return EXIT_SUCCESS;
 }
 
-void load_questions(std::vector<Question*> *questions)
+void load_questions(vector<Question>& questions)
 {
-	std::ifstream infile;
+	ifstream infile;
 
-	infile.open("questionsdb", std::ifstream::in);
+	infile.open("questionsdb", ifstream::in);
 }
 
-void add_question_to_db(std::vector<Question*> *questions, Question* q)
+void add_question_to_db(vector<Question>& questions, Question& q)
 {
 	/* Segfaulting here */
-	questions->push_back(q);
+	questions.push_back(q);
 
 	std::ofstream outfile;
 
 	outfile.open("questionsdb", std::ofstream::app);
-	outfile << q;
+	outfile << q.description() << endl << q.answer();
 }
