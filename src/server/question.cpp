@@ -3,6 +3,8 @@
 #include <string>
 
 using std::string;
+using std::ostream;
+using std::endl;
 
 string Question::description()
 {
@@ -36,4 +38,10 @@ Question::Question()
 {
 	_description = "";
 	_answer = "";
+}
+
+ostream& operator<<(ostream& os, const Question& q)
+{
+	os << q._description << "#!#" << q._answer << endl;
+	return os;
 }

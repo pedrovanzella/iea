@@ -8,6 +8,8 @@ class Question
 {
 	std::string _description;
 	std::string _answer;
+
+	friend std::ostream& operator<<(std::ostream&, const Question&);
   public:
 	std::string description();
 	std::string answer();

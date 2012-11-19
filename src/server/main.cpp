@@ -50,5 +50,5 @@ void add_question_to_db(vector<Question>& questions, Question& q)
 	std::ofstream outfile;
 
 	outfile.open("questionsdb", std::ofstream::app);
-	outfile << q.description() << endl << q.answer();
+	outfile << q;
 }
