@@ -6,12 +6,12 @@ using std::string;
 using std::ostream;
 using std::endl;
 
-string Question::description()
+string Question::description() const
 {
 	return _description;
 }
 
-string Question::answer()
+string Question::answer() const
 {
 	return _answer;
 }
@@ -42,6 +42,6 @@ Question::Question()
 
 ostream& operator<<(ostream& os, const Question& q)
 {
-	os << q._description << "#!#" << q._answer << endl;
+	os << q.description() << "#!#" << q.answer() << endl;
 	return os;
 }

@@ -11,8 +11,8 @@ class Question
 
 	friend std::ostream& operator<<(std::ostream&, const Question&);
   public:
-	std::string description();
-	std::string answer();
+	std::string description() const;
+	std::string answer() const;
 
 	void set_description(std::string);
 	void set_answer(std::string);
