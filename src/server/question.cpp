@@ -6,6 +6,8 @@ using std::string;
 using std::ostream;
 using std::endl;
 
+const string Question::separator = "#!#";
+
 string Question::description() const
 {
 	return _description;
@@ -34,6 +36,17 @@ Question::Question(string d, string a)
 	set_answer(a);
 }
 
+Question::Question(string q)
+{
+	string::size_type s = q.find_first_of(this->separator);
+
+	string desc(q, s - this->separator.size()); /* HERE BE DRAGONS */
+	string ans(q.begin() + s + this->separator.size(), q.end());
+
+	_description = desc;
+	_answer = ans;
+}
+
 Question::Question()
 {
 	_description = "";
@@ -42,6 +55,6 @@ Question::Question()
 
 ostream& operator<<(ostream& os, const Question& q)
 {
-	os << q.description() << "#!#" << q.answer() << endl;
+	os << q.description() << q.separator << q.answer() << endl;
 	return os;
 }
