@@ -1,4 +1,8 @@
-all: prepare bin/client bin/server bin/managequestions
+all: prepare client server managequestions
+
+client: bin/client
+server: bin/server
+managequestions: bin/managequestions
 
 CXX = clang++
 CXXFLAGS = -Wall
