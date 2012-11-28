@@ -10,7 +10,7 @@ CXXFLAGS = -Wall
 LIBS = -lboost_system-mt
 
 CLIENT_OBJS = objs/client/main.o
-SERVER_OBJS = objs/server/main.o objs/server/question.o objs/server/player.o
+SERVER_OBJS = objs/server/main.o objs/server/question.o objs/server/player.o objs/server/team.o
 MANAGEQUESTIONS_OBJS = objs/server/question.o objs/server/managequestions.o
 SHARED_OBJS = 
 
@@ -39,8 +39,11 @@ objs/server/question.o: src/server/question.cpp src/server/question.hpp
 objs/server/managequestions.o: src/server/managequestions.cpp
 	$(CXX) $(CXXFLAGS) -c src/server/managequestions.cpp -o objs/server/managequestions.o
 
-objs/server/player.o: src/server/player.cpp
+objs/server/player.o: src/server/player.cpp src/server/player.hpp
 	$(CXX) $(CXXFLAGS) -c src/server/player.cpp -o objs/server/player.o
+
+objs/server/team.o: src/server/team.cpp src/server/team.hpp
+	$(CXX) $(CXXFLAGS) -c src/server/team.cpp -o objs/server/team.o
 
 clean:
 	rm -r objs bin
