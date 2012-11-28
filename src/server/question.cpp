@@ -40,7 +40,7 @@ Question::Question(string q)
 {
 	string::size_type s = q.find_first_of(this->separator);
 
-	string desc(q, s - this->separator.size()); /* HERE BE DRAGONS */
+	string desc(q, 0, s);
 	string ans(q.begin() + s + this->separator.size(), q.end());
 
 	_description = desc;
