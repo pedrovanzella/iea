@@ -1,4 +1,3 @@
-#include <boost/asio.hpp>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -15,8 +14,6 @@ using std::getline;
 
 int main(int argc, char** argv)
 {
-	boost::asio::io_service io_service;
-
 	cout << "Init server" << endl;
 
 	vector<Question> questions;
