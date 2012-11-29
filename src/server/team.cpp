@@ -26,7 +26,14 @@ void Team::add_player(const Player& p)
 
 void Team::remove_player(const Player& p)
 {
-	// TODO
+	std::vector<Player>::iterator i;
+	for (i = _players.begin(); i != _players.end(); i++) {
+		if (i->id() == p.id()) { /* TODO: Overload == in Player */
+			_players.erase(i);
+			return;
+		}
+	}
+	/* TODO: Throw exception if we get here, there were no player p in _players */
 }
 
 const int Team::id() const
