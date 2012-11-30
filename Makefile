@@ -10,7 +10,7 @@ CXXFLAGS = -Wall
 LIBS = -lboost_system-mt
 
 CLIENT_OBJS = objs/client/main.o
-SERVER_OBJS = objs/server/main.o objs/server/question.o objs/server/player.o objs/server/team.o
+SERVER_OBJS = objs/server/main.o objs/server/question.o objs/server/player.o objs/server/team.o objs/server/session.o
 MANAGEQUESTIONS_OBJS = objs/server/question.o objs/server/managequestions.o
 SHARED_OBJS = objs/shared/message.o
 
@@ -44,6 +44,9 @@ objs/server/player.o: src/server/player.cpp src/server/player.hpp
 
 objs/server/team.o: src/server/team.cpp src/server/team.hpp
 	$(CXX) $(CXXFLAGS) -c src/server/team.cpp -o objs/server/team.o
+
+objs/server/session.o: src/server/session.cpp src/server/session.hpp
+	$(CXX) $(CXXFLAGS) -c src/server/session.cpp -o objs/server/session.o
 
 objs/shared/message.o: src/shared/message.cpp src/shared/message.hpp
 	$(CXX) $(CXXFLAGS) -c src/shared/message.cpp -o objs/shared/message.o

@@ -56,3 +56,8 @@ void Team::deliver(const message& msg)
 	std::for_each(players_.begin(), players_.end(),
 			boost::bind(&Player::deliver, _1, boost::ref(msg)));
 }
+
+void Team::leave(player_ptr player)
+{
+	players_.erase(player);
+}
