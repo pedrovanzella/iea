@@ -1,23 +1,26 @@
 #ifndef _SERVER_TEAM_HPP_
 #define _SERVER_TEAM_HPP_
 #include "player.hpp"
-#include <vector>
+#include "../shared/message.hpp"
+#include <set>
 
 class Team
 {
 	private:
-		std::vector<Player> _players;
 		int _id;
 		int _score;
+		std::set<player_ptr> players_;
+		enum { max_recent_msgs = 100 };
+		message_queue recent_msgs_;
 
 	public:
 		Team();
 		Team(int id);
 
-		const std::vector<Player> players() const;
+		void join(player_ptr);
+		void leave(player_ptr);
 
-		void add_player(const Player&);
-		void remove_player(const Player&);
+		void deliver(const message&);
 
 		const int id() const;
 		int id();

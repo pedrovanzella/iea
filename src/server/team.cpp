@@ -1,6 +1,7 @@
-#include <vector>
+#include <set>
 #include "team.hpp"
 #include "player.hpp"
+#include <boost/bind.hpp>
 
 Team::Team()
 {
@@ -12,28 +13,6 @@ Team::Team(int id)
 {
 	_id = id;
 	_score = 0;
-}
-
-const std::vector<Player> Team::players() const
-{
-	return _players;
-}
-
-void Team::add_player(const Player& p)
-{
-	_players.push_back(p);
-}
-
-void Team::remove_player(const Player& p)
-{
-	std::vector<Player>::iterator i;
-	for (i = _players.begin(); i != _players.end(); i++) {
-		if (i->id() == p.id()) { /* TODO: Overload == in Player */
-			_players.erase(i);
-			return;
-		}
-	}
-	/* TODO: Throw exception if we get here, there were no player p in _players */
 }
 
 const int Team::id() const
@@ -59,4 +38,21 @@ int Team::score()
 void Team::increase_score()
 {
 	_score++;
+}
+
+void Team::join(player_ptr player)
+{
+	players_.insert(player);
+	std::for_each(recent_msgs_.begin(), recent_msgs_.end(),
+			boost::bind(&Player::deliver, player, _1));
+}
+
+void Team::deliver(const message& msg)
+{
+	recent_msgs_.push_back(msg);
+	while (recent_msgs_.size() > max_recent_msgs)
+		recent_msgs_.pop_front();
+
+	std::for_each(players_.begin(), players_.end(),
+			boost::bind(&Player::deliver, _1, boost::ref(msg)));
 }

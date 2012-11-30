@@ -14,6 +14,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <deque>
 
 class message
 {
@@ -48,5 +49,7 @@ private:
   char data_[header_length + max_body_length];
   size_t body_length_;
 };
+
+typedef std::deque<message> message_queue;
 
 #endif // CHAT_MESSAGE_HPP
