@@ -7,7 +7,7 @@ managequestions: bin/managequestions
 CXX = clang++
 CXXFLAGS = -Wall
 
-LIBS = -lboost_system-mt
+LIBS = -lboost_system-mt -lboost_thread-mt
 
 CLIENT_OBJS = objs/client/main.o objs/client/client.o
 SERVER_OBJS = objs/server/main.o objs/server/question.o objs/server/player.o objs/server/team.o objs/server/session.o objs/server/server.o
