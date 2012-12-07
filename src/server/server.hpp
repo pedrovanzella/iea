@@ -11,11 +11,7 @@
 class server
 {
 	public:
-		server(boost::asio::io_service& io_service, const boost::asio::ip::tcp::endpoint& endpoint)
-		: io_service_(io_service), acceptor_(io_service, endpoint)
-		{
-			start_accept();
-		}
+		server(boost::asio::io_service& io_service, const boost::asio::ip::tcp::endpoint& endpoint);
 
 		void start_accept();
 		void handle_accept(session_ptr, const boost::system::error_code&);

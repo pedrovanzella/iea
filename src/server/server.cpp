@@ -6,6 +6,12 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
+
+server::server(boost::asio::io_service& io_service, const boost::asio::ip::tcp::endpoint& endpoint) : io_service_(io_service), acceptor_(io_service, endpoint)
+{
+	start_accept();
+}
+
 void server::start_accept()
 {
 	session_ptr new_session(new session(io_service_, team_));
