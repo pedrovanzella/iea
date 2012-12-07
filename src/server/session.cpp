@@ -108,7 +108,7 @@ void session::parse_message_for_commands(message& msg)
 		switch (cmd[1]) {
 			case 't':
 			case 'T':
-				team_ = server_->team_with_id(cmd[3]);
+				team_ = server_->team_with_id(std::atoi(&cmd[3]));
 		}
 	}
 }
