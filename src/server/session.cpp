@@ -1,10 +1,22 @@
 #include "session.hpp"
+#include <iostream>
+#include <string>
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
 using boost::asio::ip::tcp;
+using std::cout;
+using std::endl;
+using std::string;
+
+session::session(boost::asio::io_service& io_service, Team& team, server* s) 
+	: socket_(io_service), team_(team)
+{
+   server_ = s;
+}
+
 
 tcp::socket& session::socket()
 {
@@ -54,6 +66,7 @@ void session::handle_read_body(const boost::system::error_code& error)
 {
 	if (!error)
 	{
+		parse_message_for_commands(read_msg_);
 		team_.deliver(read_msg_);
 		boost::asio::async_read(socket_,
 				boost::asio::buffer(read_msg_.data(), message::header_length),
@@ -83,5 +96,19 @@ void session::handle_write(const boost::system::error_code& error)
 	else
 	{
 		team_.leave(shared_from_this());
+	}
+}
+
+void session::parse_message_for_commands(message& msg)
+{
+	string cmd(msg.body(), msg.body_length());
+
+	if (cmd[0] == '/') { // All cmds must start with '/'
+		cout << cmd << endl;
+		switch (cmd[1]) {
+			case 't':
+			case 'T':
+				team_ = server_->team_with_id(cmd[3]);
+		}
 	}
 }

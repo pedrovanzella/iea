@@ -9,6 +9,9 @@
 #include "team.hpp"
 #include "session.hpp"
 
+class session;
+typedef boost::shared_ptr<session> session_ptr;
+
 class server
 {
 	public:
@@ -16,6 +19,8 @@ class server
 
 		void start_accept();
 		void handle_accept(session_ptr, const boost::system::error_code&);
+		
+		Team& team_with_id(int id);
 
 	private:
 		boost::asio::io_service& io_service_;
@@ -25,5 +30,4 @@ class server
 
 typedef boost::shared_ptr<server> server_ptr;
 typedef std::list<server_ptr> server_list;
-
 #endif /* _SERVER_SERVER_HPP_ */
