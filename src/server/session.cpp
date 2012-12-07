@@ -108,7 +108,9 @@ void session::parse_message_for_commands(message& msg)
 		switch (cmd[1]) {
 			case 't':
 			case 'T':
+				team_.leave(shared_from_this());
 				team_ = server_->team_with_id(std::atoi(&cmd[3]));
+				team_.join(shared_from_this());
 		}
 	}
 }
