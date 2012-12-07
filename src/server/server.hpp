@@ -5,6 +5,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <list>
+#include <vector>
 #include "team.hpp"
 #include "session.hpp"
 
@@ -19,7 +20,7 @@ class server
 	private:
 		boost::asio::io_service& io_service_;
 		boost::asio::ip::tcp::acceptor acceptor_;
-		Team team_;
+		std::vector<Team> teams_;
 };
 
 typedef boost::shared_ptr<server> server_ptr;

@@ -1,6 +1,7 @@
 #include "server.hpp"
 #include "team.hpp"
 #include "session.hpp"
+#include <vector>
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
@@ -9,12 +10,13 @@
 
 server::server(boost::asio::io_service& io_service, const boost::asio::ip::tcp::endpoint& endpoint) : io_service_(io_service), acceptor_(io_service, endpoint)
 {
+	teams_.push_back(Team());
 	start_accept();
 }
 
 void server::start_accept()
 {
-	session_ptr new_session(new session(io_service_, team_));
+	session_ptr new_session(new session(io_service_, teams_[0]));
 	acceptor_.async_accept(new_session->socket(),
 			boost::bind(&server::handle_accept, this, new_session,
 				boost::asio::placeholders::error));
