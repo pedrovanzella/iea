@@ -16,6 +16,26 @@ Team::Team(int id)
 	_score = 0;
 }
 
+Team::Team(const Team& t)
+{
+    *this = t;
+}
+
+Team::Team(Team& t)
+{
+	*this = t;
+}
+
+Team& Team::operator=(Team& t)
+{
+	*this = t;
+}
+
+Team& Team::operator=(const Team& t)
+{
+    *this = t;
+}
+
 const int Team::id() const
 {
 	return _id;

@@ -1,4 +1,5 @@
 #include "session.hpp"
+#include "server.hpp"
 #include <iostream>
 #include <string>
 #include <memory>
