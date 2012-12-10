@@ -1,6 +1,7 @@
 #include "server.hpp"
 #include "team.hpp"
 #include "session.hpp"
+#include "bot.hpp"
 #include <vector>
 #include <iostream>
 #include <boost/asio.hpp>
@@ -9,12 +10,13 @@
 #include <boost/enable_shared_from_this.hpp>
 
 
-server::server(boost::asio::io_service& io_service, const boost::asio::ip::tcp::endpoint& endpoint) : io_service_(io_service), acceptor_(io_service, endpoint)
+server::server(boost::asio::io_service& io_service, const boost::asio::ip::tcp::endpoint& endpoint) : io_service_(io_service), acceptor_(io_service, endpoint), gamemaster(this)
 {
 	for (int i = 0; i <= 9; i++) {
 		teams_.push_back(Team(i)); // First team is team with id 0
 	}
 	start_accept();
+	gamemaster.run();
 }
 
 void server::start_accept()

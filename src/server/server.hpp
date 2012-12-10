@@ -11,6 +11,7 @@
 #include "bot.hpp"
 
 class session;
+class Bot;
 typedef boost::shared_ptr<session> session_ptr;
 
 class server

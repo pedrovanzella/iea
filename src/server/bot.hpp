@@ -10,21 +10,21 @@
 // para cada cliente, ele ouve a resposta
 // compara, pontua, gg evr1
 
+class server;
+
 class Bot
 {
 	public:
-		Bot() {}
+		Bot();
+		Bot(server* s) : server_(s) {}
 
 		void run();
 
 		void load_questions();
 
-		void ask();
-		void check_answer(std::string);
-
 	private:
 		std::vector<Question> questions_;
-		Question last_question_asked;
+		server* server_;
 };
 
 #endif /* _SERVER_BOT_HPP_ */

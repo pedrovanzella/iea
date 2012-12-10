@@ -3,6 +3,8 @@
 #include <vector>
 #include "bot.hpp"
 #include "question.hpp"
+#include "server.hpp"
+#include "team.hpp"
 
 using std::ifstream;
 using std::string;
@@ -20,10 +22,8 @@ void Bot::load_questions()
 }
 
 
-void Bot::ask()
+void Bot::run()
 {
-	Question q = questions_[std::rand() % questions_.size()];
-	last_question_asked = q;
-	/* Send question to all teams in server */
+	std::vector<Team>::iterator i = server_->teams_.begin();
+	// Cria uma thread por team, passa uma referência pro team pra thread
 }
-
