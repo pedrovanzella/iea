@@ -2,6 +2,7 @@
 #include "team.hpp"
 #include "player.hpp"
 #include <boost/bind.hpp>
+#include <thread>
 
 Team::Team()
 {
@@ -37,7 +38,9 @@ int Team::score()
 
 void Team::increase_score()
 {
+	m.lock();
 	_score++;
+	m.unlock();
 }
 
 void Team::join(player_ptr player)

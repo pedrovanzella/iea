@@ -1,6 +1,7 @@
 #include "session.hpp"
 #include <iostream>
 #include <string>
+#include <memory>
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
@@ -112,5 +113,9 @@ void session::parse_message_for_commands(message& msg)
 				team_ = server_->team_with_id(std::atoi(&cmd[3]));
 				team_.join(shared_from_this());
 		}
+	} else { // Find out if we got the right answer
+		// If so, unlock the mutex;
+		// team_thread_mutex_[teamid].unlock()
+		// How do we find out the team id from the message?
 	}
 }

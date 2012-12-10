@@ -31,6 +31,7 @@ void server::handle_accept(session_ptr session, const boost::system::error_code&
 {
 	if (!error) {
 		session->start();
+		sessions_.push_back(session);
 	}
 	
 	start_accept();
@@ -48,6 +49,4 @@ Team& server::team_with_id(int id)
 	}
 
 	std::cout << "No Team with ID " << id << " found!" << std::endl;
-	static Team t = NULL;
-	return t; // Gambiarra
 }

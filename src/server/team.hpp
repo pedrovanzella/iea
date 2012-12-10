@@ -3,6 +3,7 @@
 #include "player.hpp"
 #include "../shared/message.hpp"
 #include <set>
+#include <thread>
 
 class Team
 {
@@ -12,6 +13,7 @@ class Team
 		std::set<player_ptr> players_;
 		enum { max_recent_msgs = 100 };
 		message_queue recent_msgs_;
+		std::mutex m;
 
 	public:
 		Team();

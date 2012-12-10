@@ -29,6 +29,7 @@ class server
 		boost::asio::io_service& io_service_;
 		boost::asio::ip::tcp::acceptor acceptor_;
 		std::vector<Team> teams_;
+		std::vector<session_ptr> sessions_;
 		Bot gamemaster;
 };
 
