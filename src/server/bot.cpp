@@ -1,6 +1,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <thread>
 #include "bot.hpp"
 #include "question.hpp"
 #include "server.hpp"
@@ -26,4 +27,8 @@ void Bot::run()
 {
 	std::vector<Team>::iterator i = server_->teams_.begin();
 	// Cria uma thread por team, passa uma referência pro team pra thread
+}
+
+void Bot::run_game(Team& t)
+{
 }
