@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <thread>
+#include <iostream>
 #include "bot.hpp"
 #include "question.hpp"
 #include "server.hpp"
@@ -25,11 +26,19 @@ void Bot::load_questions()
 
 void Bot::run()
 {
-	std::vector<Team>::iterator i;
+	load_questions();
 	// Cria uma thread por team, passa uma referência pro team pra thread
-	for (i = server_->teams_.begin(); i != server_->teams_.end(); i++) {
-		team_threads_.push_back(std::thread([i](){
-					/* Run game here */
+	for (auto i : server_->teams_) {
+		team_threads_.push_back(std::thread([i, this](){
+					while(true) {
+						/* Run game here */
+						Question q = this->questions_[rand() % this->questions_.size()]; // Random question selected. There is a better way.
+						std::cout << "[" << i.id() << "] " << q.description() << std::endl;
+					}
 					}));
+	}
+
+	for (auto& t : team_threads_) {
+		t.join(); 
 	}
 }
