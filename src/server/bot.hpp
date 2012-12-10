@@ -1,7 +1,8 @@
 #ifndef _SERVER_BOT_HPP_
 #define _SERVER_BOT_HPP_
+#include <vector>
+#include <string>
 #include "question.hpp"
-#include "vector"
 
 class Bot
 {
@@ -10,12 +11,12 @@ class Bot
 
 		void load_questions();
 
-		const Question& rand_question() const;
-		void ask();
-		void check_answer();
+		Question& ask();
+		void check_answer(std::string);
 
 	private:
-		vector<Question> questions_;
+		const Question& rand_question() const;
+		std::vector<Question> questions_;
 		Question last_question_asked;
 };
 
