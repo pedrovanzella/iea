@@ -18,3 +18,12 @@ void Bot::load_questions()
 	    questions_.push_back(q);
 	}
 }
+
+
+void Bot::ask()
+{
+	Question q = questions_[std::rand() % questions_.size()];
+	last_question_asked = q;
+	/* Send question to all teams in server */
+}
+

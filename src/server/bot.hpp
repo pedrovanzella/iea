@@ -3,19 +3,26 @@
 #include <vector>
 #include <string>
 #include "question.hpp"
+// Server tem um Bot
+// Bot.run() cria uma thread para cada team
+// em cada thread de team, ele cria uma thread de player (?)
+// Ele envia, pela thread de team, a mensagem com a pergunta
+// para cada cliente, ele ouve a resposta
+// compara, pontua, gg evr1
 
 class Bot
 {
 	public:
 		Bot() {}
 
+		void run();
+
 		void load_questions();
 
-		Question& ask();
+		void ask();
 		void check_answer(std::string);
 
 	private:
-		const Question& rand_question() const;
 		std::vector<Question> questions_;
 		Question last_question_asked;
 };
