@@ -26,16 +26,6 @@ int main(int argc, char** argv)
 		}
 		cout << "Init server" << endl << endl;
 
-		vector<Question> questions;
-
-		cout << "Loading questions" << endl;
-		load_questions(questions);
-		cout << "Questions loaded" << endl;
-
-		//for(vector<Question>::iterator i = questions.begin(); i != questions.end(); i++) {
-		//    cout << "Question: " << i->description() << endl << "\tAnswer: " << i->answer() << endl << endl;
-		//}
-
 		boost::asio::io_service io_service;
 		server_list servers;
 		for (int i = 1; i < argc; ++i) {
@@ -50,16 +40,4 @@ int main(int argc, char** argv)
 	}
 
 	return EXIT_SUCCESS;
-}
-
-void load_questions(vector<Question>& questions)
-{
-	ifstream infile;
-	infile.open("questionsdb", ifstream::in);
-
-	string newquestion;
-	while(getline(infile, newquestion)) {
-	    Question q(newquestion);
-	    questions.push_back(q);
-	}
 }

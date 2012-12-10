@@ -19,11 +19,14 @@ class Team
 		Team();
 		Team(int id);
 
-		Team(const Team&);
-		Team(Team&);
+		explicit Team(const Team&);
+		explicit Team(Team&);
 
 		Team& operator=(Team&);
 		Team& operator=(const Team&);
+
+		void set_score(int);
+		void set_id(int);
 
 		void join(player_ptr);
 		void leave(player_ptr);

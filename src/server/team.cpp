@@ -6,19 +6,18 @@
 
 Team::Team()
 {
-	_id = 0;
-	_score = 0;
+    _id = 0;
+    _score = 0;
 }
 
-Team::Team(int id)
+Team::Team(int id) : _id(id)
 {
-	_id = id;
-	_score = 0;
+    _score = 0;
 }
 
 Team::Team(const Team& t)
 {
-    *this = t;
+	*this = t;
 }
 
 Team::Team(Team& t)
@@ -33,7 +32,17 @@ Team& Team::operator=(Team& t)
 
 Team& Team::operator=(const Team& t)
 {
-    *this = t;
+	*this = t;
+}
+
+void Team::set_score(int s)
+{
+	_score = s;
+}
+
+void Team::set_id(int i)
+{
+	_id = i;
 }
 
 const int Team::id() const
