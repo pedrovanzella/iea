@@ -25,10 +25,11 @@ void Bot::load_questions()
 
 void Bot::run()
 {
-	std::vector<Team>::iterator i = server_->teams_.begin();
+	std::vector<Team>::iterator i;
 	// Cria uma thread por team, passa uma referência pro team pra thread
-}
-
-void Bot::run_game(Team& t)
-{
+	for (i = server_->teams_.begin(); i != server_->teams_.end(); i++) {
+		team_threads_.push_back(std::thread([i](){
+					/* Run game here */
+					}));
+	}
 }

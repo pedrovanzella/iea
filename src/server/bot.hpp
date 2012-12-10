@@ -25,7 +25,6 @@ class Bot
 		void load_questions();
 
 	private:
-		void run_game(Team&);
 		std::vector<Question> questions_;
 		server* server_;
 		std::vector<std::thread> team_threads_;
