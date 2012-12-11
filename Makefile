@@ -5,7 +5,7 @@ server: bin/server
 managequestions: bin/managequestions
 
 CXX = clang++
-CXXFLAGS = -Wall --std=c++11 --stdlib=libc++
+CXXFLAGS = -Wall
 
 LIBS = -lboost_system-mt -lboost_thread-mt
 

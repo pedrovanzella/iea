@@ -2,7 +2,6 @@
 #include "team.hpp"
 #include "player.hpp"
 #include <boost/bind.hpp>
-#include <thread>
 
 Team::Team()
 {
@@ -15,25 +14,25 @@ Team::Team(int id) : _id(id)
     _score = 0;
 }
 
-Team::Team(const Team& t)
-{
-	*this = t;
-}
+//Team::Team(const Team& t)
+//{
+//    *this = t;
+//}
 
-Team::Team(Team& t)
-{
-	*this = t;
-}
+//Team::Team(Team& t)
+//{
+//    *this = t;
+//}
 
-Team& Team::operator=(Team& t)
-{
-	*this = t;
-}
+//Team& Team::operator=(Team& t)
+//{
+//    *this = t;
+//}
 
-Team& Team::operator=(const Team& t)
-{
-	*this = t;
-}
+//Team& Team::operator=(const Team& t)
+//{
+//    *this = t;
+//}
 
 void Team::set_score(int s)
 {
@@ -67,9 +66,7 @@ int Team::score()
 
 void Team::increase_score()
 {
-	m.lock();
 	_score++;
-	m.unlock();
 }
 
 void Team::join(player_ptr player)

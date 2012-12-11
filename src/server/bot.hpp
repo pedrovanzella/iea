@@ -5,7 +5,6 @@
 #include "question.hpp"
 #include "team.hpp"
 #include "session.hpp"
-#include <thread>
 // Server tem um Bot
 // Bot.run() cria uma thread para cada team
 // em cada thread de team, ele cria uma thread de player (?)
@@ -29,8 +28,6 @@ friend class session;
 	private:
 		std::vector<Question> questions_;
 		server* server_;
-		std::vector<std::thread> team_threads_;
-		std::vector<std::mutex> team_thread_mutex_;
 };
 
 #endif /* _SERVER_BOT_HPP_ */
