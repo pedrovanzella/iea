@@ -4,14 +4,14 @@
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
+#include <boost/thread.hpp>
 #include <list>
 #include <vector>
 #include "team.hpp"
 #include "session.hpp"
-#include "bot.hpp"
+#include "question.hpp"
 
 class session;
-class Bot;
 typedef boost::shared_ptr<session> session_ptr;
 
 class server
@@ -25,12 +25,17 @@ class server
 		
 		Team& team_with_id(int id);
 
+		void run();
+		static void run_game(Team&);
+		void load_questions();
+
 	private:
 		boost::asio::io_service& io_service_;
 		boost::asio::ip::tcp::acceptor acceptor_;
 		std::vector<Team> teams_;
 		std::vector<session_ptr> sessions_;
-		Bot gamemaster;
+		std::vector<Question> questions_;
+		boost::thread team_threads[10];
 };
 
 typedef boost::shared_ptr<server> server_ptr;

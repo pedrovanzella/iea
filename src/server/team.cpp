@@ -9,8 +9,9 @@ Team::Team()
     _score = 0;
 }
 
-Team::Team(int id) : _id(id)
+Team::Team(int id)
 {
+	_id = id;
     _score = 0;
 }
 
