@@ -11,12 +11,10 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/thread.hpp>
 
-
 server::server(boost::asio::io_service& io_service, const boost::asio::ip::tcp::endpoint& endpoint) : io_service_(io_service), acceptor_(io_service, endpoint)
 {
 	for (int i = 0; i <= 9; i++) {
-		Team *t = new Team(i);
-	    teams_.push_back(*t); // First team is team with id 0
+	    teams_.push_back(Team(i)); // First team is team with id 0
 		std::cout << "Criei time " << teams_[i].id() << std::endl;
 	}
 	start_accept();
@@ -78,13 +76,12 @@ void server::run()
 
 	std::vector<Team>::size_type i;
 	for (i = 0; i != teams_.size(); i++) {
-		// Cria uma thread por team, passa uma referência pro team pra thread
-		std::cout << "Achei time " << teams_[i].id() << std::endl;
-		team_threads[i] = boost::thread(boost::thread(boost::bind(&server::run_game, teams_[i])));
+	    // Cria uma thread por team, passa uma referência pro team pra thread
+	    std::cout << "Achei time " << teams_[i].id() << std::endl;
+		team_threads[i] = boost::thread(boost::thread(&server::run_game, teams_[i]));
 
 		team_threads[i].join();
 	}
-
 }
 
 static boost::mutex team_print_mutex;

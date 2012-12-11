@@ -14,16 +14,7 @@ class Team
 		message_queue recent_msgs_;
 
 	public:
-		Team();
 		Team(int id);
-
-		//explicit Team(const Team&);
-		//explicit Team(Team&);
-
-		//Team& operator=(Team&);
-		//Team& operator=(const Team&);
-
-
 
 		void set_score(int);
 		void set_id(int);
