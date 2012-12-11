@@ -35,7 +35,6 @@ class server
 		std::vector<Team> teams_;
 		std::vector<session_ptr> sessions_;
 		std::vector<Question> questions_;
-		boost::thread team_threads[10];
 };
 
 typedef boost::shared_ptr<server> server_ptr;

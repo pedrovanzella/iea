@@ -74,13 +74,13 @@ void server::run()
 	load_questions();
 	std::cout << "Questions loaded" << std::endl;
 
-	std::vector<Team>::size_type i;
-	for (i = 0; i != teams_.size(); i++) {
+	std::vector<Team>::iterator i;
+	for (i = teams_.begin(); i != teams_.end(); i++) {
 	    // Cria uma thread por team, passa uma referência pro team pra thread
-	    std::cout << "Achei time " << teams_[i].id() << std::endl;
-		team_threads[i] = boost::thread(boost::thread(&server::run_game, teams_[i]));
+	    std::cout << "Achei time " << i->id() << std::endl;
+		//boost::thread t(&server::run_game, *i);
 
-		team_threads[i].join();
+		//t.join();
 	}
 }
 
