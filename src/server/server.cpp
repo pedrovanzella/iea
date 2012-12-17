@@ -11,6 +11,7 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/thread.hpp>
 
+/* Inicia o servidor, criando 10 times (somente por questões de performance */
 server::server(boost::asio::io_service& io_service, const boost::asio::ip::tcp::endpoint& endpoint) : io_service_(io_service), acceptor_(io_service, endpoint)
 {
 	for (int i = 0; i <= 9; i++) {
@@ -21,14 +22,16 @@ server::server(boost::asio::io_service& io_service, const boost::asio::ip::tcp::
 	run();
 }
 
+/* Começa a aceitar conexões */
 void server::start_accept()
 {
-	session_ptr new_session(new session(io_service_, teams_[0], this));
+	session_ptr new_session(new session(io_service_, teams_[0], this)); /* Quando chega uma nova conexão, cria uma nova sessão pra ela */
 	acceptor_.async_accept(new_session->socket(),
 			boost::bind(&server::handle_accept, this, new_session,
 				boost::asio::placeholders::error));
 }
 
+/* Coloca a sessão no vetor de sessões para sabermos quem está conectado */
 void server::handle_accept(session_ptr session, const boost::system::error_code& error)
 {
 	if (!error) {
@@ -39,6 +42,7 @@ void server::handle_accept(session_ptr session, const boost::system::error_code&
 	start_accept();
 }
 
+/* Retorna uma referência para um time com a ID fornecida. Se ele não existir, cria um novo time */
 Team& server::team_with_id(int id)
 {
 	std::cout << "Will look for team with ID " << id << std::endl;
@@ -56,6 +60,7 @@ Team& server::team_with_id(int id)
 	return *t;
 }
 
+/* Carrega a db de questões */
 void server::load_questions()
 {
 	std::ifstream infile;
@@ -68,6 +73,7 @@ void server::load_questions()
 	}
 }
 
+/* Bot que controla o jogo */
 void server::run()
 {
 	std::cout << "Loading questions" << std::endl;
@@ -85,6 +91,7 @@ void server::run()
 }
 
 static boost::mutex team_print_mutex;
+/* Bot individual de cada time */
 void server::run_game(Team& t)
 {
 	team_print_mutex.lock();

@@ -23,7 +23,7 @@ class Player
 		Player(int id);
 
 		virtual ~Player() {}
-		virtual void deliver(const message& msg) = 0;
+		virtual void deliver(const message& msg) = 0; /* Implementado na sessão */
 };
 
 typedef boost::shared_ptr<Player> player_ptr;
